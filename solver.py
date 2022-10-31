@@ -14,7 +14,7 @@ class Solver:
         solution.recycleRefundChoice = "True"
         solution.bagPrice = 10
         solution.refundAmount = 1
-        solution.bagType = 1
+        solution.bagType = bagtype
         
         solution.orders = []
         for day in range(0, days):
