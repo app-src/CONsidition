@@ -2,14 +2,18 @@ import json
 
 class Solution:
     def __init__(self, recycleRefundChoice, bagPrice, refundAmount, bagType):
+        self.mapName = None
         self.recycleRefundChoice = recycleRefundChoice
         self.bagPrice = bagPrice
         self.refundAmount = refundAmount
         self.bagType = bagType
         self.orders = []
 
-    def addOrder(self, int):
-        self.orders.append(int)
+    def addOrder(self, order):
+        self.orders.append(order)
+
+    def addMapName(self, mapName):
+        self.mapName = mapName
 
     def toJSON(self):
-        return json.loads(json.dumps(self, default=lambda o: o.__dict__))
+        return json.dumps(self, default=lambda o: o.__dict__)

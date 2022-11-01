@@ -27,12 +27,13 @@ def mapInfo(api_key, map_name):
 
 def submit_game(api_key, map_name, solution):
 
+    solution.addMapName(map_name)
     try:
         global sess
         if not sess:
             sess = requests.Session()
-        response = sess.post(base_api_path + "submit" + "?MapName=" +
-                             map_name, headers={"x-api-key": api_key}, verify=True, json=solution.toJSON())
+        response = sess.post(base_api_path + "submit",
+                             headers={"x-api-key": api_key}, verify=True, json=json.loads(solution.toJSON()))
         if response.status_code == 200:
             return response.json()
 
