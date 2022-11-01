@@ -1,4 +1,5 @@
 import json
+
 import requests
 from requests import RequestException
 
@@ -25,12 +26,13 @@ def mapInfo(api_key, map_name):
 
 
 def submit_game(api_key, map_name, solution):
+
     try:
         global sess
         if not sess:
             sess = requests.Session()
         response = sess.post(base_api_path + "submit" + "?MapName=" +
-                             map_name, headers={"x-api-key": api_key}, verify=True, json=solution)  
+                             map_name, headers={"x-api-key": api_key}, verify=True, json=solution.toJSON())
         if response.status_code == 200:
             return response.json()
 
