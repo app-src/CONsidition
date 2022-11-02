@@ -5,7 +5,7 @@ from solution import Solution
 
 class Solver:
     bagType_price = [1.7, 1.75, 6, 25, 200]
-    bagType_co2_transport = [3.9, 4.2, 1.8, 3.6, 12.0]
+    bagType_co2_transport = [3.0, 4.2, 1.8, 3.6, 12.0]
     bagType_co2_production = [30, 24, 36, 42, 60]
 
     def __init__(self, game_info):
