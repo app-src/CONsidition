@@ -27,7 +27,7 @@ def main(orderMax):
     score = submit_game_response["score"]
     temp = submit_game_response["dailys"]
     for i in temp:
-        scores.append(i["negativeCustomerScore"]+i["positiveCustomerScore"]-i["c02"])
+        scores.append(i["negativeCustomerScore"]+i["positiveCustomerScore"])
     # print(submit_game_response)
     print("for orderMax: ",orderMax)
     print("Score: " + str(score))

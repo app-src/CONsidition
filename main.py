@@ -8,7 +8,7 @@ api_key = "6762a10e-d948-4746-4558-08dab2e5ba74"   # TODO: Your api key here
 # map_name = "Suburbia" if random.randint(0,2)==0 else "Fancyville"
 # TODO: You bag type choice here. Unless changed, the bag type 1 will be selected.
 # bag_type = random.randint(1,5)
-threads = 500
+threads = 1
 
 map_name = "Suburbia"
 best_scores = []
@@ -29,13 +29,13 @@ def main():
 	# print("Starting game...")
 	global played_games, best_scores, best_scoresD, map_name,maxScore,maxchoices
 
-	for i in range(100):
+	for i in range(1):
 		# map_name = "Suburbia" if random.randint(0,2)==0 else "Fancyville"
 		response = api.mapInfo(api_key, map_name)
 		days = 31 if map_name == "Suburbia" or map_name == "Fancyville" else 365
 		
 		# random shit happens here x
-		choices=[4, 6, 0, 3, 8, 2, 0, 0, 3, 5, 10, 11, 2, 0, 0, 2, 6, 1, 0, 6, 4, 1, 3, 0, 0, 0, 0, 0, 1, 0, 0]
+		choices=[7, 4, 0, 5, 4, 0, 3, 2, 3, 4, 6, 13, 1, 1, 4, 2, 9, 0, 0, 1, 5, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0]
 		for i in range(days):
 			choices[i]+=random.randint(-3,3)
 			if choices[i]<0:
@@ -68,7 +68,7 @@ def main():
 			print("Game #{}: Score: {}".format(played_games, maxScore))
 			f2 = open("result.txt", 'w')
 			f2.write("Game #{}: Score: {}\n".format(played_games, maxScore))
-			# print(submit_game_response)
+			print(submit_game_response)
 			f2.write(str(maxchoices))
 		
 			f2.close()

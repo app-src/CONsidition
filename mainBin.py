@@ -1,10 +1,10 @@
 from solver2 import Solver
-import api,math,threading
+import api,math,threading,time
 
 api_key = "6762a10e-d948-4746-4558-08dab2e5ba74"   # TODO: Your api key here
 # The different map names can be found on considition.com/rules
 # TODO: You map choice here. Unless changed, the map "Suburbia" will be selected.
-map_name = "Suburbia"
+map_name = "Fancyville"
 # TODO: You bag type choice here. Unless changed, the bag type 1 will be selected.
 bag_type = 2
 orderMax=[0 for i in range(31)]
@@ -13,75 +13,65 @@ scoreForIndex=-math.inf
 
 data={}
 
+def getScoreAt(i):
+    temp=orderMax.copy()
+    temp[orderIndex]=i
+    _s,d=main(temp)
+    return(d[orderIndex])
 
 def main(orderMax):
+    st="".join([str(i) for i in orderMax])
+    if st in data:
+        return data[st][0],data[st][1]
     print("\n\n\nStarting game...")
     scores = []
     response = api.mapInfo(api_key, map_name)
-    # print(response)
     days = 31 if map_name == "Suburbia" or map_name == "Fancyville" else 365
     solver = Solver(game_info=response)
     solution = solver.Solve(bag_type, days,orderMax)
 
     submit_game_response = api.submit_game(api_key, map_name, solution)
-    score = submit_game_response["score"]
-    temp = submit_game_response["dailys"]
-    for i in temp:
-        scores.append(i["negativeCustomerScore"]+i["positiveCustomerScore"]-i["c02"])
-    # print(submit_game_response)
-    print("for orderMax: ",orderMax)
-    print("Score: " + str(score))
-    print("Daily scores: " + str(scores))
-    return score,scores
-
-# def callNRecord(orderList):
-#     for i in range(10):
-#         th = threading.Thread(target=main,name=str(orderList)+": i", args=(orderList,))
-#         th.start()
-
-
+    if submit_game_response != None:
+        score = submit_game_response["score"]
+        temp = submit_game_response["dailys"]
+        for i in temp:
+            scores.append(i["negativeCustomerScore"]+i["positiveCustomerScore"])
+        print("for orderMax: ",orderMax)
+        print("Score: " + str(score))
+        print("Daily scores: " + str(scores))
+        data[st]=(score,scores)
+        return score,scores
 
 def binS(a,b):
-    if a==b:
-        orderMax[orderIndex]=a+1
+    scoreA = getScoreAt(a)
+    scoreB = getScoreAt(b)
+    scoreMid = getScoreAt((a+b)//2)
+    if a+1==b:
+        if scoreA>scoreB:
+            orderMax[orderIndex]=a
+        else:
+            orderMax[orderIndex]=b
         return
-    temp=orderMax
-    temp[orderIndex]=a
-    _t,scoreA=main(temp)
-    temp[orderIndex]=b
-    _t,scoreB=main(temp)
-    if scoreA==scoreB:
-        binS(b,b*2)
-    else:
-        mid=(a+b)//2
-        temp[orderIndex]=mid
-        _t,scoreMid=main(temp)
-        if scoreMid>scoreA and scoreMid==scoreB:
-            binS(a,mid)
-        elif scoreMid>scoreA and scoreMid<scoreB:
-            binS(mid+1,b)
-        elif scoreMid==scoreA and scoreMid<scoreB:
-            binS(mid+1,b)
-            
-            # if scoreMid>scoreA:
-            #     a=mid
-            # else:
-            #     b=mid
-    #     orderMax[orderIndex]=a
-    #     orderIndex+=1
-    #     binS(0,1)
-
-    # if a==b:
-    #     return a
-    # mid=(a+b)//2
-    # if scores[mid]>scores[mid+1]:
-    #     return binS(scores,a,mid)
-    # else:
-    #     return binS(scores,mid+1,b)
-
+    if scoreA==scoreMid and scoreMid==scoreB:
+        orderMax[orderIndex]=a
+        return
+    if scoreA==scoreMid and scoreMid<scoreB:
+        binS((a+b)//2,b)
+        return
+    if scoreA<scoreMid and scoreMid==scoreB:
+        binS(a,(a+b)//2)
+        return
+    if scoreA<scoreMid and scoreMid<scoreB:
+        if (a+b)//2==b-1:
+            orderMax[orderIndex]=b
+            return
+        binS((a+b)//2,b)
+        return
+        
 if __name__ == "__main__":
-    for i in range(31):
+    t=time.time()
+    for i in range(5):
         binS(0,100)
         orderIndex+=1
         print(orderMax)
-        # print(i)
+    print(time.time()-t)
