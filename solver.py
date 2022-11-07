@@ -20,16 +20,11 @@ class Solver:
 
     def Solve(self, bagtype, days,choices=0,recycleRefundChoice=0,refundAmountMultiplicationFactor=0):
         self.days = days
-        solution = Solution(recycleRefundChoice, 10,1, bagtype)
+        solution = Solution(recycleRefundChoice, self.bagType_price[bagtype-1],self.bagType_price[bagtype-1]*1, bagtype)
 
         for day in range(0, days):
             choice = choices[day]
-            if choice == 1:
-                solution.addOrder(self.wasteMoney(bagtype-1))
-            elif choice == 0:
-                solution.addOrder(self.splitMoney(bagtype-1))
-            else:
-                solution.addOrder(self.holdMoney(bagtype-1))
+            solution.addOrder(choice)
             pass
 
         

@@ -10,7 +10,7 @@ api_key = "6762a10e-d948-4746-4558-08dab2e5ba74"   # TODO: Your api key here
 # bag_type = random.randint(1,5)
 threads = 500
 
-map_name = "Fancyville"
+map_name = "Suburbia"
 best_scores = []
 best_scoresD = {}
 maxScore=-inf
@@ -34,35 +34,12 @@ def main():
 		days = 31 if map_name == "Suburbia" or map_name == "Fancyville" else 365
 		
 		# random shit happens here x
-		choices=[]
+		choices=[2, 6, 0, 2, 8, 0, 0, 0, 0, 8, 8, 12, 6, 0, 0, 0, 0, 0, 0, 4, 10, 2, 8, 0, 0, 0, 0, 0, 0, 2, 0]
 		for i in range(days):
-			choices.append(random.randint(0,2))
-			
-		# choices[0]=0
-		# choices[1]=0
-		# choices[2]=0
-		# choices[3]=0
-		# # choices[4]=random.randint(0,1)
-		# # choices[6]=random.randint(0,1)
-		# # choices[13]=random.randint(1,2)
-		# # choices[15]=random.randint(1,2)
-		# # choices[17]=random.randint(1,2)
-		# # choices[18]=random.randint(1,2)
-		# # choices[19]=random.randint(1,2)
-		# choices[20]=random.randint(1,2)
-		# choices[21]=random.randint(1,2)
-		# choices[22]=random.randint(1,2)
-		# choices[23]=random.randint(1,2)
-		# choices[24]=random.randint(1,2)
-		# choices[25]=random.randint(1,2)
-		# choices[26]=random.randint(1,2)
-		# choices[27]=random.randint(1,2)
-		# choices[28]=random.randint(1,2)
-		# choices[29]=random.randint(1,2)
-		# choices[30]=random.randint(1,2)
-		# bag_type = 2
-		# recycleRefundChoice = random.randint(0,1)
-		# refundAmountMultiplicationFactor = random.random()
+			choices[i]+=random.randint(-3,3)
+			if choices[i]<0:
+				choices[i]=0
+		
 		bag_type = 2
 		recycleRefundChoice = True
 		refundAmountMultiplicationFactor = random.random()
@@ -90,6 +67,7 @@ def main():
 			f2 = open("result.txt", 'w')
 			f2.write("Game #{}: Score: {}\n".format(played_games, maxScore))
 			# print(submit_game_response)
+			f2.write(str(choices))
 		
 			f2.close()
 
