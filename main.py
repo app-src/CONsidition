@@ -35,7 +35,7 @@ def main():
 		days = 31 if map_name == "Suburbia" or map_name == "Fancyville" else 365
 		
 		# random shit happens here x
-		choices=[2, 6, 0, 2, 8, 0, 0, 0, 0, 8, 8, 12, 6, 0, 0, 0, 0, 0, 0, 4, 10, 2, 8, 0, 0, 0, 0, 0, 0, 2, 0]
+		choices=[4, 6, 0, 3, 8, 2, 0, 0, 3, 5, 10, 11, 2, 0, 0, 2, 6, 1, 0, 6, 4, 1, 3, 0, 0, 0, 0, 0, 1, 0, 0]
 		for i in range(days):
 			choices[i]+=random.randint(-3,3)
 			if choices[i]<0:
