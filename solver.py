@@ -9,21 +9,33 @@ class Solver:
     bagType_co2_production = [30, 24, 36, 42, 60]
 
     def __init__(self, game_info):
-        self.days = None
-        self.population = game_info["population"]
-        self.companyBudget = game_info["companyBudget"]
-        self.behavior = game_info["behavior"]
+        try:
+            self.days = None
+            self.population = game_info["population"]
+            self.companyBudget = game_info["companyBudget"]
+            self.behavior = game_info["behavior"]
+        except:
+            print("Error in Solver.__init__")
 
-    def Solve(self, bagtype, days):
+
+    def Solve(self, bagtype, days,choices=0,recycleRefundChoice=0,refundAmountMultiplicationFactor=0):
         self.days = days
-        solution = Solution(True, 10, 1, bagtype)
+        solution = Solution(recycleRefundChoice, 10,1, bagtype)
 
         for day in range(0, days):
-            solution.addOrder(self.wasteMoney(bagtype))
+            choice = choices[day]
+            if choice == 1:
+                solution.addOrder(self.wasteMoney(bagtype-1))
+            elif choice == 0:
+                solution.addOrder(self.splitMoney(bagtype-1))
+            else:
+                solution.addOrder(self.holdMoney(bagtype-1))
+            pass
+
         
         return solution
 
-
+    
     # Solution 1: "Spend all money day 1"
     def wasteMoney(self, bagtype):
         return int(self.companyBudget / self.bagType_price[bagtype])

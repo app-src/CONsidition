@@ -21,6 +21,7 @@ def mapInfo(api_key, map_name):
         print(str(response.status_code) + " " +
               response.reason + ": " + response.text)
     except RequestException as e:
+        return "Fatal Error: could not start game"
         print("Fatal Error: could not start game")
         print("Something went wrong with the request: " + str(e))
 
