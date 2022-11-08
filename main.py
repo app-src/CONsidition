@@ -12,7 +12,7 @@ threads = 200
 
 map_name = "Suburbia"
 choicesF=[22, 48, 29, 52, 111, 62, 53, 29, 3, 57, 32, 47, 30, 10, 11, 42, 51, 10, 20, 27, 77, 0, 8, 40, 38, 8, 0, 0, 0, 5, 7]
-choicesS=[2, 6, 0, 2, 8, 0, 0, 0, 0, 8, 8, 12, 6, 0, 0, 0, 0, 0, 0, 4, 10, 2, 8, 0, 0, 0, 0, 0, 0, 2, 0]
+choicesS=[3, 1, 9, 10, 7, 8, 10, 0, 1, 1, 3, 0, 0, 7, 0, 4, 8, 0, 6, 0, 7, 5, 4, 2, 5, 4, 5, 3, 1, 7, 0]
 choices=choicesF
 
 best_scores = []
@@ -49,7 +49,7 @@ def main():
 		
 		bag_type = 2
 		recycleRefundChoice = True
-		refundAmountMultiplicationFactor = random.random()
+		refundAmountMultiplicationFactor = 1
 		# best_scores.append(score)
 		# best_scores.sort(reverse=True)
 		# best_scores=best_scores[:10]

@@ -20,7 +20,7 @@ class Solver:
 
     def Solve(self, bagtype, days,choices=0,recycleRefundChoice=0,refundAmountMultiplicationFactor=0):
         self.days = days
-        solution = Solution(recycleRefundChoice, self.bagType_price[bagtype-1],self.bagType_price[bagtype-1]*1, bagtype)
+        solution = Solution(recycleRefundChoice, self.bagType_price[bagtype-1],self.bagType_price[bagtype-1]*refundAmountMultiplicationFactor, bagtype)
 
         for day in range(0, days):
             choice = choices[day]

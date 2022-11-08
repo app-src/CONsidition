@@ -44,7 +44,7 @@ def main():
 			if ch[i]<0:
 				ch[i]=0
 		
-		bag_type = 2
+		bag_type = random.randint(1,5)
 		recycleRefundChoice = True
 		refundAmountMultiplicationFactor = random.random()
 		# best_scores.append(score)
@@ -65,9 +65,9 @@ def main():
 			if score>maxScore:
 				maxchoices=ch
 				maxScore=score
-			print("Game #{}: Score: {}".format(played_games, maxScore),ch)
+			print("Game #{}: Max Score: {}".format(played_games, maxScore),ch)
 			f2 = open(map_name+"resultRand.txt", 'w')
-			f2.write("Game #{}: Score: {}\n".format(played_games, maxScore))
+			f2.write("Game #{}: Max Score: {}\n".format(played_games, maxScore))
 			# print(submit_game_response)
 			f2.write(str(maxchoices))
 			f2.close()
