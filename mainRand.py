@@ -40,7 +40,7 @@ def main():
 		ch=[0 for i in range(days)]
 		# random shit happens here x
 		for i in range(days):
-			ch[i]=random.randint(0,100)
+			ch[i]=random.randint(0,10)
 			if ch[i]<0:
 				ch[i]=0
 		
@@ -65,7 +65,7 @@ def main():
 			if score>maxScore:
 				maxchoices=ch
 				maxScore=score
-			print("Game #{}: Score: {}".format(played_games, maxScore))
+			print("Game #{}: Score: {}".format(played_games, maxScore),ch)
 			f2 = open(map_name+"resultRand.txt", 'w')
 			f2.write("Game #{}: Score: {}\n".format(played_games, maxScore))
 			# print(submit_game_response)
