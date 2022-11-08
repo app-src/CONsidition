@@ -10,7 +10,7 @@ api_key = "6762a10e-d948-4746-4558-08dab2e5ba74"   # TODO: Your api key here
 # bag_type = random.randint(1,5)
 threads = 200
 
-map_name = "Suburbia"
+map_name = "Sky Scrape City"
 
 
 best_scores = []
@@ -20,7 +20,7 @@ played_games=0
 f = open(map_name+"RandNEW.csv", 'w')
 writer = csv.writer(f)
 
-maxVals=[0 for i in range(31)]
+maxVals=[0 for i in range(365)]
 maxchoices=[]
 
 header=["score","bag_type","recycleRefundChoice","refundAmountMultiplicationFactor","choices1","choices2","choices3","choices4","choices5","choices6","choices7","choices8","choices9","choices10","choices11","choices12","choices13","choices14","choices15","choices16","choices17","choices18","choices19","choices20","choices21","choices22","choices23","choices24","choices25","choices26","choices27","choices28","choices29","choices30","choices31"]
@@ -40,7 +40,7 @@ def main():
 		ch=[0 for i in range(days)]
 		# random shit happens here x
 		for i in range(days):
-			ch[i]=random.randint(0,10)
+			ch[i]=random.randint(0,100000)
 			if ch[i]<0:
 				ch[i]=0
 		
