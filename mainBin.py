@@ -70,7 +70,7 @@ def binS(a,b):
         
 if __name__ == "__main__":
     t=time.time()
-    for i in range(5):
+    for i in range(31):
         binS(0,100)
         orderIndex+=1
         print(orderMax)
